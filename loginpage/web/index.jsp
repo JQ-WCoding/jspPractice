@@ -11,6 +11,6 @@
     <title>Main</title>
 </head>
 <body>
-<input type="button" onclick="location.href='logIn/signIn.jsp'" value="LogIn">
+<input type="button" onclick="location.href='signin/signIn.jsp'" value="LogIn">
 </body>
 </html>
