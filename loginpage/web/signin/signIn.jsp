@@ -9,6 +9,36 @@
 <html>
 <head>
     <title>logIn</title>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+    </script>
+    <script>
+        function validate() {
+            // a~z, A~Z, 0~9 4자 ~ 12자리 정규식
+            let re = /^[a-zA-Z0-9]{4,12}/;
+            // 정규식 사용 필요할듯
+            let id = document.getElementById('id');
+            let pw = document.getElementById('password');
+            let cPw = document.getElementById('confirmPassword');
+            let year = document.getElementById('year');
+
+            if (!check(re, id, "아이디 4 ~ 12자 영문 대소문자와 숫자")) {
+                return false;
+            }
+            if (!check(re, pw, "비밀번호 4 ~ 12자 영문 대소문자와 숫자")) {
+                return false;
+            }
+            if (pw !== cPw){
+                alert("비밀번호 오류");
+                pw.focus();
+                return false;
+            }
+
+            alert("회원가입 완료");
+        }
+    </script>
 </head>
 <body>
 <form action="check.js" method="post">
@@ -52,6 +82,7 @@
             <span>
                 <label for="month"></label>
                     <select id="month">
+                        <option value="none">월</option>
                         <option value="01">1</option>
                         <option value="02">2</option>
                         <option value="03">3</option>
@@ -72,7 +103,7 @@
                 <input type="text" id="day" aria-label="일" placeholder="일" maxlength="2">
             </span>
         </div>
-<%--            성별 선택--%>
+        <%--            성별 선택--%>
         <div>
             <label for="gender">성별</label>
             <span>
