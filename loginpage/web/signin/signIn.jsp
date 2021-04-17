@@ -17,31 +17,54 @@
     <script>
         function validate() {
             // a~z, A~Z, 0~9 4자 ~ 12자리 정규식
-            let re = /^[a-zA-Z0-9]{4,12}/;
+            let regId = RegExp(/^[a-zA-Z0-9]{4,12}/);
+            let regPw = RegExp(/^[a-zA-Z0-9]{4,12}/);
+            let regEmail = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]/);
             // 정규식 사용 필요할듯
             let id = document.getElementById('id');
             let pw = document.getElementById('password');
             let cPw = document.getElementById('confirmPassword');
+            let email = document.getElementById('email');
             let year = document.getElementById('year');
+            let month = document.getElementById('month');
+            let day = document.getElementById('day');
+            let gender = document.getElementById('gender');
 
-            if (!check(re, id, "아이디 4 ~ 12자 영문 대소문자와 숫자")) {
+            // 아이디 유효성 검사
+            if (!regId.test(id.value)) {
+                alert('아이디는 4 ~ 12자리 대소문자 영어로 사용가능합니다.');
                 return false;
             }
-            if (!check(re, pw, "비밀번호 4 ~ 12자 영문 대소문자와 숫자")) {
+            // 비밀번호 유효성 검사
+            if (!regPw.test(pw.value)) {
+                alert('비밀번호는 4 ~ 12자리 대소문자 영어로 사용가능합니다.');
                 return false;
             }
-            if (pw !== cPw){
-                alert("비밀번호 오류");
+            // 비밀번호 확인 유효성 검사
+            if (!regPw.test(cPw.value)) {
+                alert('비밀번호는 4 ~ 12자리 대소문자 영어로 사용가능합니다.');
+                return false;
+            }
+            // 비밀번호와 비밀번호 확인 값 동일 여부 확인
+            if (pw.value !== cPw.value) {
+                alert("비밀번호가 다릅니다.");
+                pw.value = "";
+                cPw.value = "";
                 pw.focus();
                 return false;
             }
+            // 이메일 유효성 검사
+            if (!regEmail.test(email.value)) {
+                alert('이메일 형식을 지켜야 사용가능합니다.');
+                return false;
+            }
 
-            alert("회원가입 완료");
+            return true;
         }
     </script>
 </head>
 <body>
-<form action="check.js" method="post">
+<form action="../index.jsp" method="post" onsubmit="return validate()">
     <div id="container" role="main">
         <%--        아이디 입력 라인 --%>
         <div>
